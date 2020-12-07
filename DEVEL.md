@@ -219,3 +219,27 @@ If you really need to change them, you need to get a password to write in some p
 They are tagged with the date you built them. If you change the tag you will also have to change the tag in `admin/Dockerfile` and `ide/Dockerfile`
 
 The process is manual because it is infrequent and needs awareness of what you are doing.
+
+## docker-compose
+
+The docker-compose.yml can be used to start the following process
+
+ - redis
+ - openwhisk
+
+It must be invoked using the project name *iosdk*, for example: 
+
+ - starting stack
+
+```
+docker-compose -p iosdk up -d
+```
+
+ - stopping stack
+
+ ```
+ docker-compose -p iosdk stop
+ docker ps --filter name=wsk0* -aq | xargs docker stop
+ ```
+
+The last line is a bug to be fixed, the `wsk0*` process are not properly stopped, yet.
